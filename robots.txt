@@ -1,3 +1,11 @@
-# Allow crawling of all content
+# Robots.txt for terraformforops.com
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /.github/
+Disallow: /staticwebapp.config.json
+
+# Sitemap location
+Sitemap: https://terraformforops.com/sitemap.xml
+
+# Crawl rate (optional, adjust as needed)
+Crawl-delay: 1
