@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>404 - Page Not Found | Terraform for Ops</title>
+    <meta name="title" content="404 - Page Not Found | Terraform for Ops">
+    <meta name="description" content="Oops! The page you're looking for doesn't exist. Return to Terraform for Ops to explore our Infrastructure as Code articles.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .error-container {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .error-code {
+            font-size: 8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .error-title {
+            font-size: 2rem;
+            color: var(--text-color);
+            margin: 20px 0 10px;
+        }
+
+        .error-description {
+            font-size: 1.1rem;
+            color: #666;
+            margin: 0 auto 30px;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .error-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .error-button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .error-button-secondary {
+            background: #f5f5f5;
+            color: var(--text-color);
+        }
+
+        .error-button-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .error-image {
+            margin: 40px 0;
+        }
+
+        .error-image img {
+            max-width: 300px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .error-suggestions {
+            margin-top: 50px;
+            padding: 30px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .error-suggestions h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .error-suggestions ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .error-suggestions li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .error-suggestions li:last-child {
+            border-bottom: none;
+        }
+
+        .error-suggestions a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .error-suggestions a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 5rem;
+            }
+
+            .error-title {
+                font-size: 1.5rem;
+            }
+
+            .error-description {
+                font-size: 1rem;
+            }
+
+            .error-image img {
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-text">
+                    <h1>🚀 Terraform for Ops</h1>
+                    <p class="subtitle">Master Infrastructure as Code for Operations Teams</p>
+                    <p class="subtitle-small">Expert articles and practical guides from <a href="https://techielass.com" target="_blank">Techielass.com</a></p>
+                </div>
+                <div class="header-image">
+                    <img src="with-twitter-handle-purple.png" alt="Techielass" />
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="error-container">
+            <h2 class="error-code">404</h2>
+            <h1 class="error-title">Oops! Page Not Found</h1>
+            <p class="error-description">
+                Looks like this resource has been destroyed... or never existed in the first place! 
+                The page you're looking for might have been moved, deleted, or the URL might be incorrect.
+            </p>
+
+            <div class="error-actions">
+                <a href="/" class="error-button">Return Home</a>
+                <a href="javascript:history.back()" class="error-button error-button-secondary">Go Back</a>
+            </div>
+
+            <div class="error-suggestions">
+                <h3>💡 Here's what you can do:</h3>
+                <ul>
+                    <li>🏠 <a href="/">Visit our homepage</a> to browse all Terraform articles</li>
+                    <li>🔍 Check the URL for typos or errors</li>
+                    <li>📝 Browse <a href="https://techielass.com/tag/terraform/" target="_blank">Techielass.com</a> directly</li>
+                    <li>🐦 Follow <a href="https://twitter.com/techielass" target="_blank">@techielass on Twitter</a> for updates</li>
+                    <li>☕ <a href="https://www.buymeacoffee.com/techielass" target="_blank">Support Sarah</a> and grab a virtual coffee</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 <a href="https://techielass.com" target="_blank">Techielass.com</a> | All content belongs to original author - <a href="https://www.sarahlean.com" target="_blank">Sarah Lean</a></p>
+        </div>
+    </footer>
+</body>
+</html>
