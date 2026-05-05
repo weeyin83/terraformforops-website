@@ -158,45 +158,53 @@ async function parseRSSFeed(xmlText) {
 }
 
 /**
+ * Fetch blog posts using rss2json API (returns JSON, handles CORS)
+ */
+async function fetchViaRss2Json() {
+    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_FEED_URL)}`;
+    const response = await fetch(apiUrl);
+    if (!response.ok) throw new Error(`rss2json HTTP ${response.status}`);
+    const data = await response.json();
+    if (data.status !== 'ok') throw new Error('rss2json returned error status');
+    
+    return data.items.map(item => ({
+        title: item.title || '',
+        link: item.link || '',
+        description: item.description || '',
+        content: item.content || item.description || '',
+        pubDate: item.pubDate || '',
+        thumbnail: item.thumbnail || null,
+        categories: item.categories || []
+    }));
+}
+
+/**
+ * Fallback: fetch RSS feed via CORS proxy and parse XML
+ */
+async function fetchViaProxy() {
+    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(RSS_FEED_URL)}`;
+    const response = await fetch(proxyUrl);
+    if (!response.ok) throw new Error(`Proxy HTTP ${response.status}`);
+    const xmlText = await response.text();
+    return parseRSSFeed(xmlText);
+}
+
+/**
  * Fetch and display blog posts
  */
 async function fetchBlogPosts() {
     try {
         console.log('Fetching RSS feed from:', RSS_FEED_URL);
         
-        // Try all CORS proxies simultaneously and use whichever responds first
-        const corsProxies = [
-            `https://api.allorigins.win/raw?url=${encodeURIComponent(RSS_FEED_URL)}`,
-            `https://corsproxy.io/?${encodeURIComponent(RSS_FEED_URL)}`,
-            RSS_FEED_URL // Direct attempt as fallback
-        ];
-        
-        // Create fetch promises with timeout
-        const fetchWithTimeout = (url, timeout = 8000) => {
-            return Promise.race([
-                fetch(url).then(response => {
-                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                    return response.text();
-                }),
-                new Promise((_, reject) => 
-                    setTimeout(() => reject(new Error('Timeout')), timeout)
-                )
-            ]);
-        };
-        
-        // Try all proxies at once, use first successful response
-        const xmlText = await Promise.any(
-            corsProxies.map(url => fetchWithTimeout(url))
-        ).catch(err => {
-            console.error('All fetch attempts failed:', err);
-            throw new Error('Unable to fetch RSS feed from any source');
-        });
-        
-        console.log('Successfully fetched RSS feed');
-        
-        // Parse the RSS feed
-        const posts = await parseRSSFeed(xmlText);
-        console.log('Parsed', posts.length, 'total posts');
+        let posts;
+        try {
+            posts = await fetchViaRss2Json();
+            console.log('Fetched via rss2json:', posts.length, 'posts');
+        } catch (err) {
+            console.warn('rss2json failed, trying proxy fallback:', err);
+            posts = await fetchViaProxy();
+            console.log('Fetched via proxy fallback:', posts.length, 'posts');
+        }
         
         // Filter for Terraform-related posts (as backup check)
         const terraformPosts = posts.filter(isTerraformRelated);
